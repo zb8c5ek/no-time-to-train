@@ -1743,10 +1743,10 @@ class Sam2MatchingBaselineNoAMG(nn.Module):
             image_info=input_dicts[0]["target_img_info"],
         )
 
-        self._vis_results_online(output_dict, input_dicts[0]["tar_anns_by_cat"],
-                                 score_thr=0.5,
-                                 show_scores=True,
-                                 dataset_name=self.dataset_name)
+        # self._vis_results_online(output_dict, input_dicts[0]["tar_anns_by_cat"],
+        #                          score_thr=0.5,
+        #                          show_scores=True,
+        #                          dataset_name=self.dataset_name)
         # self._vis_results_online(output_dict, input_dicts[0]["tar_anns_by_cat"], score_thr=0.5, show_scores=True, dataset_name='lvis')
         self._reset()
         

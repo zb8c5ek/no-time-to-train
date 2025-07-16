@@ -85,10 +85,10 @@ conda activate no-time-to-train
 
 We will install SAM2 and DinoV2 from source.
 ```bash
-cd sam2
 pip install -e .
-cd ../dinov2
+cd dinov2
 pip install -e .
+cd ..
 ```
 
 ### 4. Download datasets
@@ -106,6 +106,7 @@ cd checkpoints
 wget https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_large.pt
 cd dinov2
 wget https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth
+cd ../..
 ```
 
 
