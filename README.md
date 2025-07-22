@@ -72,7 +72,13 @@
   - [2. Post-process memory bank](#2-post-process-memory-bank)
   - [3. Inference on target images](#3-inference-on-target-images)
   - [Results](#results)
-- [🔍 Citation](#-citation)
+- [🔍 Custom dataset](#-custom-dataset)
+  - [0. Prepare a custom dataset ⛵🐦](#0-prepare-a-custom-dataset)
+  - [0.1 If only bbox annotations are available](#01-if-only-bbox-annotations-are-available)
+  - [0.2 Convert coco annotations to pickle file](#02-convert-coco-annotations-to-pickle-file)
+  - [1. Fill memory with references](#1-fill-memory-with-references)
+  - [2. Post-process memory bank](#2-post-process-memory-bank)
+- [📚 Citation](#-citation)
 
 
 ## 🎯 Highlights
@@ -396,7 +402,7 @@ Visual results are saved in `results_analysis/my_custom_dataset/`. Note that our
 | ![000000517410](https://github.com/user-attachments/assets/9849b227-7f43-43d7-81ea-58010a623ad5) | ![000000460598](https://github.com/user-attachments/assets/7587700c-e09d-4cf6-8590-3df129c2568e) |
 
 
-## 🔍 Citation
+## 📚 Citation
 
 If you use this work, please cite us:
 
