@@ -11,7 +11,7 @@ CATEGORY_NUM=$5
 NUM_DEVICES=$((1+${#DEVICES//[^,]/})) # Count the number of commas in DEVICES
 ALL_DATASETS_PATH=/localdisk/data2/Users/s2254242/datasets
 DATASET_PATH=$ALL_DATASETS_PATH/$DATASET_NAME
-YAML_PATH=dev_hongyi/pl_configs/matching_cdfsod_template.yaml
+YAML_PATH=no_time_to_train/pl_configs/matching_cdfsod_template.yaml
 PATH_TO_SAVE_CKPTS=./tmp_ckpts/cd_fsod/matching
 mkdir -p $PATH_TO_SAVE_CKPTS
 FIRST_DEVICE=${DEVICES%%,*}
@@ -30,7 +30,7 @@ run_sam_segmentation() {
     fi
     
     echo "Running SAM segmentation for $input_json"
-    CUDA_VISIBLE_DEVICES=$DEVICES python dev_hongyi/dataset/sam_bbox_to_segm_batch.py \
+    CUDA_VISIBLE_DEVICES=$DEVICES python no_time_to_train/dataset/sam_bbox_to_segm_batch.py \
         --input_json "$input_json" \
         --image_dir "$image_dir" \
         --sam_checkpoint checkpoints/sam_vit_h_4b8939.pth \
@@ -49,7 +49,7 @@ run_sam_segmentation() {
 # SECOND STEP: convert the COCO annotations to a pickle file
 # --------------------
 # Usage: python script.py <input_json_path> <output_pkl_path>
-# python dev_hongyi/dataset/coco_to_pkl.py \
+# python no_time_to_train/dataset/coco_to_pkl.py \
 #     $DATASET_PATH/annotations/$SHOT\_shot\_with_segm.json \
 #     $DATASET_PATH/annotations/$SHOT\_shot\_with_segm.pkl \
 #     $SHOT

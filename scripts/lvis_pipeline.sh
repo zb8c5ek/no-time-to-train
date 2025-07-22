@@ -21,7 +21,7 @@ if [ $SPLIT != "lvis" ] && [ $SPLIT != "lvis_common" ] && [ $SPLIT != "lvis_freq
 fi
 
 SEED=42
-YAML_FILE=./dev_hongyi/pl_configs/matching_lvis_allClass.yaml
+YAML_FILE=./no_time_to_train/pl_configs/matching_lvis_allClass.yaml
 FILENAME=few_shot_lvis_ann_${SHOTS}shot_seed${SEED}_fixed.pkl
 
 RESULTS_DIR=./work_dirs/${SPLIT}_seed${SEED}/${SHOTS}shot
@@ -57,7 +57,7 @@ else
 fi
 
 # Generated file will have the format of <out-path>_<n_shot>shot_seed<seed>.pkl
-python dev_hongyi/dataset/few_shot_sampling.py --n-shot $SHOTS --out-path ${RESULTS_DIR}/${FILENAME} --seed $SEED \
+python no_time_to_train/dataset/few_shot_sampling.py --n-shot $SHOTS --out-path ${RESULTS_DIR}/${FILENAME} --seed $SEED \
                                                --dataset lvis --plot --img-dir ./data/coco/allimages
 
 python run_lightening.py test --config $YAML_FILE \

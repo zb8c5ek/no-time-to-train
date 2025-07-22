@@ -13,7 +13,7 @@ SHOTS=(1 2 3 5 10)
 # SEED is the seed to use for the random number generator
 SEED=33
 # YAML file to use for the config
-YAML_FILE=dev_hongyi/pl_configs/matching_pascal_voc_few_shot_template.yaml
+YAML_FILE=no_time_to_train/pl_configs/matching_pascal_voc_few_shot_template.yaml
 
 # Novel classes are always 5
 CATEGORY_NUM=5
@@ -41,7 +41,7 @@ for SHOT in ${SHOTS[@]}; do
 
 
     # Generated file will have the format of <out-path>_<n_shot>shot_seed<seed>.pkl
-    python dev_hongyi/dataset/few_shot_sampling.py --n-shot $SHOT \
+    python no_time_to_train/dataset/few_shot_sampling.py --n-shot $SHOT \
                                                 --out-path $RESULTS_DIR/${FILENAME} \
                                                 --seed $SEED \
                                                 --dataset pascal_voc_split_${PASCAL_SPLIT} \

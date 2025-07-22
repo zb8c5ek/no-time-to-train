@@ -11,7 +11,7 @@ CATEGORY_NUM=$5
 NUM_DEVICES=$((1+${#DEVICES//[^,]/})) # Count the number of commas in DEVICES
 ALL_DATASETS_PATH=/localdisk/data2/Users/s2254242/datasets
 DATASET_PATH=$ALL_DATASETS_PATH/$DATASET_NAME
-YAML_PATH=dev_hongyi/pl_configs/matching_cdfsod_template.yaml
+YAML_PATH=no_time_to_train/pl_configs/matching_cdfsod_template.yaml
 PATH_TO_SAVE_CKPTS=./tmp_ckpts/cd_fsod/matching
 mkdir -p $PATH_TO_SAVE_CKPTS
 FIRST_DEVICE=${DEVICES%%,*}

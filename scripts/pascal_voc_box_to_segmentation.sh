@@ -15,7 +15,7 @@ run_sam_segmentation() {
     fi
     
     echo "Running SAM segmentation for $input_json"
-    CUDA_VISIBLE_DEVICES=$DEVICES python dev_hongyi/dataset/sam_bbox_to_segm_batch.py \
+    CUDA_VISIBLE_DEVICES=$DEVICES python no_time_to_train/dataset/sam_bbox_to_segm_batch.py \
         --input_json "$input_json" \
         --image_dir "$image_dir" \
         --sam_checkpoint checkpoints/sam_vit_h_4b8939.pth \

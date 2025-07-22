@@ -4,7 +4,7 @@
 
 # SEEDS=(42 13 27 36 88 33 69 55 77 99)
 # SHOTS=(1 2 3 5 10 30)
-# CONFIG=./dev_hongyi/new_exps/coco_fewshot_10shot_Sam2L.yaml
+# CONFIG=./no_time_to_train/new_exps/coco_fewshot_10shot_Sam2L.yaml
 # GPUS=4
 
 # for SEED in "${SEEDS[@]}"; do
@@ -20,7 +20,7 @@
 
 # SEEDS=(27 36 88)
 # SHOTS=(1 2 3 5 10 30)
-# CONFIG=./dev_hongyi/new_exps/coco_fewshot_10shot_Sam2L.yaml
+# CONFIG=./no_time_to_train/new_exps/coco_fewshot_10shot_Sam2L.yaml
 # GPUS=4
 
 # for SEED in "${SEEDS[@]}"; do
@@ -38,7 +38,7 @@
 # VERSION 3: Run best seed setting for 10 shot,
 # for saving json file and convert/compare to semantic segmentation results
 
-CONFIG=./dev_hongyi/new_exps/coco_fewshot_10shot_Sam2L.yaml
+CONFIG=./no_time_to_train/new_exps/coco_fewshot_10shot_Sam2L.yaml
 GPUS=4
 # CUDA_VISIBLE_DEVICES=1,0,5,6 zsh ./few_shot_full_pipeline.sh $CONFIG 10 $GPUS 33
 CUDA_VISIBLE_DEVICES=1,0,5,6 zsh ./few_shot_full_pipeline.sh $CONFIG 30 $GPUS 33

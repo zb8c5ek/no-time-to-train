@@ -150,7 +150,7 @@ cd ../..
 Define useful variables and create a folder for results:
 
 ```bash
-CONFIG=./dev_hongyi/new_exps/coco_fewshot_10shot_Sam2L.yaml
+CONFIG=./no_time_to_train/new_exps/coco_fewshot_10shot_Sam2L.yaml
 CLASS_SPLIT="few_shot_classes"
 RESULTS_DIR=work_dirs/few_shot_results
 SHOTS=30
@@ -164,7 +164,7 @@ FILENAME=few_shot_${SHOTS}shot_seed${SEED}.pkl
 #### 0. Create reference set
 
 ```bash
-python dev_hongyi/dataset/few_shot_sampling.py \
+python no_time_to_train/dataset/few_shot_sampling.py \
         --n-shot $SHOTS \
         --out-path ${RESULTS_DIR}/${FILENAME} \
         --seed $SEED \
@@ -209,7 +209,7 @@ python run_lightening.py test --config $CONFIG  \
                               --trainer.devices $GPUS
 ```
 
-If you'd like to see inference results online (as they are computed), uncomment lines 1746-1749 in `dev_hongyi/models/Sam2MatchingBaseline_noAMG.py` [here](https://github.com/miquel-espinosa/no-time-to-train/blob/main/dev_hongyi/models/Sam2MatchingBaseline_noAMG.py#L1746).
+If you'd like to see inference results online (as they are computed), uncomment lines 1746-1749 in `no_time_to_train/models/Sam2MatchingBaseline_noAMG.py` [here](https://github.com/miquel-espinosa/no-time-to-train/blob/main/no_time_to_train/models/Sam2MatchingBaseline_noAMG.py#L1746).
 Adjust the score threshold `score_thr` parameter as needed to see more or less segmented instances.
 Images will now be saved in `results_analysis/few_shot_classes/`. The image on the left shows the ground truth, the image on the right shows the segmented instances found by our training-free method.
 
@@ -232,11 +232,11 @@ SEGM RESULTS:
 
 We provide the instructions for running our pipeline on a custom dataset. Annotation format are always in COCO format.
 
-[**TLDR;** See full pipeline on *custom datasets* in `scripts/matching_cdfsod_pipeline.sh`, together with examples of CD-FSOD datasets (e.g. `scripts/dior_fish.sh`)]
+> **TLDR;** See full pipeline on *custom datasets* in `scripts/matching_cdfsod_pipeline.sh`, together with examples of CD-FSOD datasets (e.g. `scripts/dior_fish.sh`)
 
 ### 0. Prepare a custom dataset ⛵🐦
 
-Let's imagine we want to detect **boats** and **birds** in a custom dataset. To use our method we will need:
+Let's imagine we want to detect **boats**⛵ and **birds**🐦 in a custom dataset. To use our method we will need:
 - At least 1 *annotated* reference image for each class (i.e. 1 reference image for boat and 1 reference image for bird)
 - Multiple target images to find instances of our desired classes.
 
@@ -273,7 +273,7 @@ We also provide a script to generate instance-level segmentation masks by using 
 # Download sam_h checkpoint. Feel free to use more recent checkpoints (note: code might need to be adapted)
 wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -O checkpoints/sam_vit_h_4b8939.pth
 # Run automatic instance segmentation from ground truth bounding boxes.
-python dev_hongyi/dataset/sam_bbox_to_segm_batch.py \
+python no_time_to_train/dataset/sam_bbox_to_segm_batch.py \
     --input_json data/my_custom_dataset/annotations/custom_references.json \
     --image_dir data/my_custom_dataset/images \
     --sam_checkpoint checkpoints/sam_vit_h_4b8939.pth \
@@ -291,7 +291,7 @@ Visualisation of the generated segmentation masks are saved in `data/my_custom_d
 ### 0.2 Convert coco annotations to pickle file
 
 ```bash
-python dev_hongyi/dataset/coco_to_pkl.py \
+python no_time_to_train/dataset/coco_to_pkl.py \
     data/my_custom_dataset/annotations/custom_references_with_segm.json \
     data/my_custom_dataset/annotations/custom_references_with_segm.pkl \
     1
@@ -307,7 +307,7 @@ DATASET_PATH=data/my_custom_dataset
 CAT_NAMES=boat,bird
 CATEGORY_NUM=2
 SHOT=1
-YAML_PATH=dev_hongyi/pl_configs/matching_cdfsod_template.yaml
+YAML_PATH=no_time_to_train/pl_configs/matching_cdfsod_template.yaml
 PATH_TO_SAVE_CKPTS=./tmp_ckpts/my_custom_dataset
 mkdir -p $PATH_TO_SAVE_CKPTS
 ```
@@ -379,11 +379,11 @@ SEGM RESULTS:
 Visual results are saved in `results_analysis/my_custom_dataset/`. Note that our method works for false negatives, that is, images that do not contain any instances of the desired classes.
 
 
-| Target image with boats | Target image with birds |
+| Target image with boats ⛵ | Target image with birds 🐦 |
 |:----------------------:|:----------------------:|
 | ![Boats]() | ![Birds]() |
 
-| Target image with boats and birds | Target image without boats or birds |
+| Target image with boats and birds ⛵🐦 | Target image without boats or birds 🚫 |
 |:---------------------------------:|:----------------------------------:|
 | ![Boats and Birds]() | ![No Boats or Birds]() |
 

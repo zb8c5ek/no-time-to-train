@@ -5,7 +5,7 @@
 
 # Function to plot reference images
 function plot_reference_images() {
-    python dev_hongyi/make_plots/plot_reference_images.py \
+    python no_time_to_train/make_plots/plot_reference_images.py \
         --json_path ./data/$1/annotations/1_shot_with_segm.json \
         --image_dir ./data/$1/train \
         --output_dir ./data/$1/annotations/1_shot_with_segm_vis \

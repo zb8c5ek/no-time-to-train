@@ -13,7 +13,7 @@ FILENAME=few_shot_ann_${SHOTS}shot_seed${SEED}_fixed.pkl
 echo "Generating few-shot annotation file with $SHOTS shots and seed $SEED"
 
 # Generated file will have the format of <out-path>_<n_shot>shot_seed<seed>.pkl
-# python dev_hongyi/dataset/few_shot_sampling.py --n-shot $SHOTS --out-path ${RESULTS_DIR}/${FILENAME} --seed $SEED --dataset $CLASS_SPLIT
+# python no_time_to_train/dataset/few_shot_sampling.py --n-shot $SHOTS --out-path ${RESULTS_DIR}/${FILENAME} --seed $SEED --dataset $CLASS_SPLIT
 
 # python run_lightening.py test --config $CONFIG \
 #                               --model.test_mode fill_memory \

@@ -12,7 +12,7 @@ SHOTS=(1 5)
 # SEED is the seed to use for the random number generator
 SEED=42
 # YAML file to use for the config
-YAML_FILE=./dev_hongyi/new_exps/coco_fewshot_10shot_Sam2L.yaml
+YAML_FILE=./no_time_to_train/new_exps/coco_fewshot_10shot_Sam2L.yaml
 
 # Novel classes are always 20
 CATEGORY_NUM=20
@@ -32,7 +32,7 @@ for SHOT in "${SHOTS[@]}"; do
 
 
     # Generated file will have the format of <out-path>_<n_shot>shot_seed<seed>.pkl
-    python dev_hongyi/dataset/few_shot_sampling.py --n-shot $SHOT \
+    python no_time_to_train/dataset/few_shot_sampling.py --n-shot $SHOT \
                                                 --out-path $RESULTS_DIR/${FILENAME} \
                                                 --seed $SEED \
                                                 --dataset coco_semantic_split_${COCO_SPLIT} \

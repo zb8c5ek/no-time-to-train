@@ -2,7 +2,7 @@
 
 # Launch command 
 # 10 shot, 4 GPUs, seed 33
-# CUDA_VISIBLE_DEVICES=0,1,2,3 ./full_seg.sh ./dev_hongyi/new_exps/coco_allclasses_10shot_Sam2L.yaml 10 4 33
+# CUDA_VISIBLE_DEVICES=0,1,2,3 ./full_seg.sh ./no_time_to_train/new_exps/coco_allclasses_10shot_Sam2L.yaml 10 4 33
 
 CONFIG=$1
 SHOTS=$2
@@ -17,7 +17,7 @@ FILENAME=coco_all_${SHOTS}shot_seed${SEED}_fixed.pkl
 echo "Generating few-shot annotation file with $SHOTS shots and seed $SEED"
 
 # Generated file will have the format of <out-path>_<n_shot>shot_seed<seed>.pkl
-# python dev_hongyi/dataset/few_shot_sampling.py --n-shot $SHOTS --out-path ${RESULTS_DIR}/${FILENAME} --seed $SEED --dataset $CLASS_SPLIT
+# python no_time_to_train/dataset/few_shot_sampling.py --n-shot $SHOTS --out-path ${RESULTS_DIR}/${FILENAME} --seed $SEED --dataset $CLASS_SPLIT
 
 # python run_lightening.py test --config $CONFIG \
 #                               --model.test_mode fill_memory \
@@ -46,7 +46,7 @@ python run_lightening.py test --config $CONFIG  \
 
 
 # For plotting the reference images, we need to adapt this command:
-# python dev_hongyi/make_plots/plot_reference_images.py \
+# python no_time_to_train/make_plots/plot_reference_images.py \
 #         --json_path ./data/$1/annotations/1_shot_with_segm.json \
 #         --image_dir ./data/$1/train \
 #         --output_dir ./data/$1/annotations/1_shot_with_segm_vis \
