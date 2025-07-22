@@ -145,7 +145,7 @@ def process_coco_annotations(args):
     
     # Create output directory for visualizations
     if args.visualize:
-        output_dir = os.path.splitext(args.input_json)[0]
+        output_dir = os.path.splitext(args.input_json)[0] + '_with_SAM_segm'
         os.makedirs(output_dir, exist_ok=True)
     
     # Group annotations by image
@@ -164,7 +164,7 @@ def process_coco_annotations(args):
             image_ids_without_anns.append(image['id'])
             images_without_anns.append(image)
 
-    print(f"\033[93mNumber of images without annotations: {len(images_without_anns)}\033[0m")
+    print(f"\033[93mNumber of images without any annotations: {len(images_without_anns)}\033[0m")
     coco_data['images'] = [image for image in coco_data['images'] if image['id'] not in image_ids_without_anns]
     
     # Process images in batches

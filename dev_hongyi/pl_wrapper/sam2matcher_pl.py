@@ -108,12 +108,19 @@ class Sam2MatcherLightningModel(LightningModule):
             model_cfg["memory_bank_cfg"]["category_num"] = int(model_cfg.pop("memory_bank_cfg.category_num"))
         if "dataset_name" in model_cfg:
             model_cfg["dataset_name"] = model_cfg.pop("dataset_name")
+        if "test.imgs_path" in model_cfg:
+            model_cfg["dataset_imgs_path"] = model_cfg.pop("test.imgs_path")
+        if "test.online_vis" in model_cfg:
+            model_cfg["online_vis"] = model_cfg.pop("test.online_vis")
+        if "test.vis_thr" in model_cfg:
+            model_cfg["vis_thr"] = float(model_cfg.pop("test.vis_thr"))
         if "test.root" in dataset_cfgs:
             dataset_cfgs["test"]["root"] = dataset_cfgs.pop("test.root")
         if "test.json_file" in dataset_cfgs:
             dataset_cfgs["test"]["json_file"] = dataset_cfgs.pop("test.json_file")
         if "test.cat_names" in dataset_cfgs:
             dataset_cfgs["test"]["cat_names"] = dataset_cfgs.pop("test.cat_names").split(",")
+            model_cfg["class_names"] = dataset_cfgs["test"]["cat_names"]
         if "test.class_split" in dataset_cfgs:
             dataset_cfgs["test"]["class_split"] = dataset_cfgs.pop("test.class_split")
             dataset_cfgs["test"]["cat_names"] = METAINFO[dataset_cfgs["test"]["class_split"]]

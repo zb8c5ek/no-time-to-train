@@ -61,11 +61,19 @@ class Sam2MatchingBaselineNoAMG(nn.Module):
         encoder_cfg,
         encoder_ckpt_path,
         memory_bank_cfg,
-        dataset_name='coco'
+        dataset_name='coco',
+        dataset_imgs_path=None,
+        class_names=None,
+        online_vis=False,
+        vis_thr=0.5
     ):
         super(Sam2MatchingBaselineNoAMG, self).__init__()
 
         self.dataset_name = dataset_name
+        self.class_names = class_names
+        self.dataset_imgs_path = dataset_imgs_path
+        self.online_vis = online_vis
+        self.vis_thr = vis_thr
         self.points_per_side = sam2_infer_cfgs.get("points_per_side")
         self.testing_point_bs = sam2_infer_cfgs.get("testing_point_bs")
         self.iou_thr = sam2_infer_cfgs.get("iou_thr")
@@ -1743,10 +1751,13 @@ class Sam2MatchingBaselineNoAMG(nn.Module):
             image_info=input_dicts[0]["target_img_info"],
         )
 
-        # self._vis_results_online(output_dict, input_dicts[0]["tar_anns_by_cat"],
-        #                          score_thr=0.5,
-        #                          show_scores=True,
-        #                          dataset_name=self.dataset_name)
+        if self.online_vis:
+            self._vis_results_online(output_dict, input_dicts[0]["tar_anns_by_cat"],
+                                    score_thr=self.vis_thr,
+                                    show_scores=True,
+                                    dataset_name=self.dataset_name,
+                                    dataset_imgs_path=self.dataset_imgs_path,
+                                    class_names=self.class_names)
         # self._vis_results_online(output_dict, input_dicts[0]["tar_anns_by_cat"], score_thr=0.5, show_scores=True, dataset_name='lvis')
         self._reset()
         
@@ -2053,7 +2064,7 @@ class Sam2MatchingBaselineNoAMG(nn.Module):
         else:
             raise NotImplementedError(f"Unrecognized data mode during inference: {data_mode}")
 
-    def _vis_results_online(self, output_dict, tar_anns_by_cat, score_thr=0.65, show_scores=False, dataset_name=None):
+    def _vis_results_online(self, output_dict, tar_anns_by_cat, score_thr=0.65, show_scores=False, dataset_name=None, dataset_imgs_path=None, class_names=None):
         import os
         from dev_hongyi.dataset.visualization import vis_coco
 
@@ -2068,7 +2079,7 @@ class Sam2MatchingBaselineNoAMG(nn.Module):
         elif dataset_name == "lvis":
             img_path = os.path.join(f"./data/coco/allimages", image_info["file_name"])
         else:
-            img_path = os.path.join(f"./data/{dataset_name}/test", image_info["file_name"])
+            img_path = os.path.join(dataset_imgs_path, image_info["file_name"])
         out_path = os.path.join(f"./results_analysis/{dataset_name}", image_info["file_name"])
 
         gt_masks = []
@@ -2108,6 +2119,7 @@ class Sam2MatchingBaselineNoAMG(nn.Module):
             img_path=img_path,
             out_path=out_path,
             show_scores=show_scores,
-            dataset_name=dataset_name
+            dataset_name=dataset_name,
+            class_names=class_names
         )
 

@@ -91,7 +91,7 @@ def generate_distinct_colors(n_colors, seed=42):
     return colors
 
 
-def vis_coco(gt_bboxes, gt_labels, gt_masks, scores, labels, bboxes, masks, score_thr, img_path, out_path, show_scores=False, dataset_name='COCO'):
+def vis_coco(gt_bboxes, gt_labels, gt_masks, scores, labels, bboxes, masks, score_thr, img_path, out_path, show_scores=False, class_names=None, dataset_name='COCO'):
     # Move template_colors inside the function
     if dataset_name.lower() == 'lvis':
         # Generate 1203 colors for LVIS dataset
@@ -183,38 +183,39 @@ def vis_coco(gt_bboxes, gt_labels, gt_masks, scores, labels, bboxes, masks, scor
             [209, 50, 169]    # Medium pink
         ]
 
-    if dataset_name == 'coco':
-        class_names = [
-            'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train',
-            'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign',
-            'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep',
-            'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella',
-            'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard',
-            'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard',
-            'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork',
-            'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange',
-            'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair',
-            'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv',
-            'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave',
-            'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase',
-            'scissors', 'teddy bear', 'hair drier', 'toothbrush'
-        ]
-    elif dataset_name == 'NEU-DET':
-        class_names = ['crazing', 'inclusion', 'patches', 'pitted_surface', 'rolled-in_scale', 'scratches']
-    elif dataset_name == 'UODD':
-        class_names = ['seacucumber', 'seaurchin', 'scallop']
-    elif dataset_name == 'ArTaxOr':
-        class_names = ['Araneae', 'Coleoptera', 'Diptera', 'Hemiptera', 'Hymenoptera', 'Lepidoptera', 'Odonata']
-    elif dataset_name == 'clipart1k':
-        class_names = ['sheep', 'chair', 'boat', 'bottle', 'diningtable', 'sofa', 'cow', 'motorbike', 'car', 'aeroplane', 'cat', 'train', 'person', 'bicycle', 'pottedplant', 'bird', 'dog', 'bus', 'tvmonitor', 'horse']
-    elif dataset_name == 'FISH':
-        class_names = ['fish']
-    elif dataset_name == 'DIOR':
-        class_names = ['Expressway-Service-area', 'Expressway-toll-station', 'airplane', 'airport', 'baseballfield', 'basketballcourt', 'bridge', 'chimney', 'dam', 'golffield', 'groundtrackfield', 'harbor', 'overpass', 'ship', 'stadium', 'storagetank', 'tenniscourt', 'trainstation', 'vehicle', 'windmill']
-    elif dataset_name in METAINFO.keys():
-        class_names = METAINFO[dataset_name]
-    else:
-        raise ValueError(f"Dataset {dataset_name} not supported")
+    if class_names is None:
+        if dataset_name == 'coco':
+            class_names = [
+                'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train',
+                'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign',
+                'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep',
+                'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella',
+                'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard',
+                'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard',
+                'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork',
+                'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange',
+                'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair',
+                'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv',
+                'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave',
+                'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase',
+                'scissors', 'teddy bear', 'hair drier', 'toothbrush'
+            ]
+        elif dataset_name == 'NEU-DET':
+            class_names = ['crazing', 'inclusion', 'patches', 'pitted_surface', 'rolled-in_scale', 'scratches']
+        elif dataset_name == 'UODD':
+            class_names = ['seacucumber', 'seaurchin', 'scallop']
+        elif dataset_name == 'ArTaxOr':
+            class_names = ['Araneae', 'Coleoptera', 'Diptera', 'Hemiptera', 'Hymenoptera', 'Lepidoptera', 'Odonata']
+        elif dataset_name == 'clipart1k':
+            class_names = ['sheep', 'chair', 'boat', 'bottle', 'diningtable', 'sofa', 'cow', 'motorbike', 'car', 'aeroplane', 'cat', 'train', 'person', 'bicycle', 'pottedplant', 'bird', 'dog', 'bus', 'tvmonitor', 'horse']
+        elif dataset_name == 'FISH':
+            class_names = ['fish']
+        elif dataset_name == 'DIOR':
+            class_names = ['Expressway-Service-area', 'Expressway-toll-station', 'airplane', 'airport', 'baseballfield', 'basketballcourt', 'bridge', 'chimney', 'dam', 'golffield', 'groundtrackfield', 'harbor', 'overpass', 'ship', 'stadium', 'storagetank', 'tenniscourt', 'trainstation', 'vehicle', 'windmill']
+        elif dataset_name in METAINFO.keys():
+            class_names = METAINFO[dataset_name]
+        else:
+            raise ValueError(f"Dataset {dataset_name} not supported")
 
     img = Image.open(img_path)
     img_copy = copy.deepcopy(img)
@@ -244,7 +245,7 @@ def vis_coco(gt_bboxes, gt_labels, gt_masks, scores, labels, bboxes, masks, scor
     gt_colors = [template_colors[ind] for ind in gt_labels]
     
     if len(labels) == 0 or len(bboxes) == 0 or len(scores) == 0:
-        return
+        pass
 
     # Draw predicted boxes and masks
     if masks is not None:
